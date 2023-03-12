@@ -10,11 +10,6 @@ jobs:
     name: Rebuild Site
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
-        with:
-          lfs: true
-
       # Ideally this makes the next step run faster
       # But I haven't noticed a speed difference
       # May want to cache the ./node_modules directory directly...
@@ -33,6 +28,11 @@ jobs:
 
       - name: Install Node Modules
         run: npm install
+
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+        with:
+          lfs: true
 
       # Switching the HTML entrypoint over to the build
       - name: Pre-Process Site
