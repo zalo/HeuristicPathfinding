@@ -15,8 +15,6 @@ let tmp1 = new THREE.Vector3();
 let tmp2 = new THREE.Vector3();
 /** @type {THREE.Vector4} */
 let tmp3 = new THREE.Vector4();
-/** @type {THREE.Vector4} */
-let tmp4 = new THREE.Vector4();
 /** @type {THREE.Vector3} */
 let embeddedSamplePoint = new THREE.Vector3();
 /** @type {THREE.BufferAttribute} */
