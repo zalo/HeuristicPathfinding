@@ -156,7 +156,7 @@ function init() {
     shader.uniforms.embeddedSamplePoint = material.uniforms.embeddedSamplePoint;
   };
 
-  loader.load("../assets/SimpleLevel.obj",
+  loader.load("./assets/SimpleLevel.obj",
     (model) => {
       
       model.traverse((child) => {
