@@ -291,7 +291,6 @@ function render(time) {
 
   if (!connections && mainModel) {
     calculateDistanceMatrix(mainModel);
-    lastTimeRefreshed = time;
   }
 
   let outputSpaceScale = 1.0;
