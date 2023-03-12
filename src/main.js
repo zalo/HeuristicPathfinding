@@ -3,7 +3,7 @@ import * as THREE from 'three';
 import { GUI          } from '../node_modules/three/examples/jsm/libs/lil-gui.module.min.js';
 import { OBJLoader    } from '../node_modules/three/examples/jsm/loaders/OBJLoader.js';
 import { OrbitControls } from '../node_modules/three/examples/jsm/controls/OrbitControls.js';
-import { mergeVertices } from '../node_modules/three/examples/jsm/utils/BufferGeometryUtils.js';
+import { mergeVertices } from './/BufferGeometryUtils.js';
 
 let container, controls, loader = new OBJLoader(); // ModelLoader
 let camera, scene1, renderer, gridHelper, file = {}, material, sphere;
