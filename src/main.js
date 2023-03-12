@@ -25,7 +25,6 @@ let distances = [];
 /** @type {[THREE.Vector4]} */
 let accumulatedDisplacements = [];
 let numVertices = 0;
-let lastTimeRefreshed = 0;
 /** @type {Float32Array} */
 let originalModelVerts;// = new Float32Array();
 /** @type {Float32Array} */
