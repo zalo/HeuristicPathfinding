@@ -1,7 +1,7 @@
 
 import * as THREE from 'three';
-import { GUI          } from '../node_modules/three/examples/jsm/libs/lil-gui.module.min.js';
-import { OBJLoader    } from '../node_modules/three/examples/jsm/loaders/OBJLoader.js';
+import { GUI           } from '../node_modules/three/examples/jsm/libs/lil-gui.module.min.js';
+import { OBJLoader     } from '../node_modules/three/examples/jsm/loaders/OBJLoader.js';
 import { OrbitControls } from '../node_modules/three/examples/jsm/controls/OrbitControls.js';
 import { mergeVertices } from './/BufferGeometryUtils.js';
 
@@ -119,7 +119,7 @@ function init() {
   sphere = new THREE.Mesh( new THREE.SphereGeometry( 1 ), new THREE.MeshPhysicalMaterial() );
   scene1.add( sphere );
 
-  material = new THREE.MeshPhysicalMaterial({ vertexColors: true });
+  material = new THREE.MeshPhysicalMaterial({ vertexColors: true, side: THREE.DoubleSide });
   material.uniforms = { embeddedSamplePoint : { value: embeddedSamplePoint } };
 
   material.onBeforeCompile = (shader) => {
@@ -200,11 +200,22 @@ async function loadModel() {
     (model) => {
       model.traverse((child) => {
         if (child.isMesh) {
+          if (mainModel) { scene1.remove(mainModel); }
           connections = null;
           mainModel = child;
           child.material = material;
-          mainModel.position.set(  0, -10, 20 );
-          mainModel.scale   .set(200, 200, 200);
+
+          // Center and Resize the model by its bounding box
+          let bbox = new THREE.Box3().setFromObject(mainModel, true);
+          let size = new THREE.Vector3();
+          size = bbox.getSize(size);
+          size = Math.max(size.x, Math.max(size.y, size.z));
+          if (size == 0.0) { console.error("Model size was zero!"); }
+          mainModel.scale.set(50.0 / size, 50.0 / size, 50.0 / size);
+          bbox = new THREE.Box3().setFromObject(mainModel, true);
+          let pos = bbox.getCenter(new THREE.Vector3());
+          mainModel.position.sub(pos.multiplyScalar(1.0));
+
           scene1.add(mainModel);
         }
       });
